@@ -121,3 +121,7 @@ iex(6)> ConsulKv.recurse_delete("consul-kv")
 ```
 
 More information, you can check the function document. And more usage example, please check the unit test cases.
+
+## Contributions
+
+Any contributions are welcomed, documentation especially.
