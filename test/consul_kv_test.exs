@@ -1,7 +1,7 @@
 defmodule ConsulKvTest do
   use ExUnit.Case
 
-  @prefix "consul-kv-test/"
+  @prefix "consul-kv-test-#{:erlang.system_info(:otp_release)}-#{System.version()}/"
 
   setup do
     assert {:ok, true} == ConsulKv.recurse_delete(@prefix)
