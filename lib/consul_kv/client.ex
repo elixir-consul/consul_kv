@@ -1,4 +1,7 @@
 defmodule ConsulKv.Client do
+  @moduledoc """
+  """
+
   use Tesla
 
   adapter Tesla.Adapter.Hackney,
@@ -78,6 +81,7 @@ defmodule ConsulKv.Client do
     |> get(query: query_params)
     |> case do
       {:ok, %{status: 200, body: body}} -> {:ok, parse_get_kv_body(body)}
+      {:ok, %{status: 404}} -> {:error, :not_found}
       {:ok, other_status} -> {:error, other_status}
       other -> other
     end
