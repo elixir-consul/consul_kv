@@ -1,6 +1,7 @@
 # ConsulKv
 
 [![GitHub actions Status](https://github.com/elixir-consul/consul_kv/workflows/CI/badge.svg)](https://github.com/elixir-consul/consul_kv/actions)
+[![Hex.pm Version](https://img.shields.io/hexpm/v/consul_kv.svg?style=flat-square)](https://hex.pm/packages/consul_kv)
 
 Elixir SDK for [Consul KV store](https://www.consul.io/api/kv.html).
 

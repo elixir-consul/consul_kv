@@ -8,7 +8,13 @@ defmodule ConsulKv.MixProject do
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      elixirc_options: [warnings_as_errors: true]
+      elixirc_options: [warnings_as_errors: true],
+      package: [
+        name: "consul_kv",
+        maintainers: ["redink"],
+        licenses: ["Apache 2.0"],
+        links: %{"GitHub" => "https://github.com/elixir-consul/consul_kv"}
+      ]
     ]
   end
 
@@ -22,7 +28,8 @@ defmodule ConsulKv.MixProject do
     [
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.16"},
-      {:jason, ">= 1.0.0"}
+      {:jason, ">= 1.0.0"},
+      {:ex_doc, "~> 0.23", only: [:dev, :test]}
     ]
   end
 end
