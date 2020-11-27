@@ -1,5 +1,17 @@
 defmodule ConsulKv.Client do
   @moduledoc """
+  The client for Consul KV store.
+
+  There are several configuration options for the client:
+
+    - consul_recv_timeout (default: 5000)
+      the timeout for receive response from the server side
+
+    - consul_connect_timeout (default: 5000)
+      the timeout for connect consul server
+
+    - consul_kv_address
+      the address of consul KV store
   """
 
   use Tesla
@@ -8,7 +20,7 @@ defmodule ConsulKv.Client do
     recv_timeout: Application.get_env(:consul_kv, :consul_recv_timeout, 5000),
     connect_timeout: Application.get_env(:consul_kv, :consul_connect_timeout, 5000)
 
-  plug Tesla.Middleware.BaseUrl, Application.get_env(:consul_kv, :consul_kv_address)
+  plug Tesla.Middleware.BaseUrl, Application.fetch_env!(:consul_kv, :consul_kv_address)
   plug Tesla.Middleware.JSON
 
   @doc """

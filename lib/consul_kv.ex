@@ -1,6 +1,6 @@
 defmodule ConsulKv do
   @moduledoc """
-  Documentation for `ConsulKv`.
+  Elixir SDK for Consul KV store.
   """
 
   @type path :: String.t()
