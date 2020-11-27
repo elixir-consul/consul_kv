@@ -62,8 +62,16 @@ defmodule ConsulKv do
   @doc """
 
   """
+  def recurse_delete(key, options \\ []) do
+    new_options = Keyword.merge(options, recurse: true)
+    delete(key, new_options)
+  end
+
+  @doc """
+
+  """
   @spec get(String.t(), Keyword.t()) :: {:ok, [ConsulKv.t()]} | {:error, any()}
-  def get(key, options \\ []), do: ConsulKv.Client.get(key, options)
+  def get(key, options \\ []), do: ConsulKv.Client.get_kv(key, options)
 
   @doc """
 
@@ -74,6 +82,7 @@ defmodule ConsulKv do
 
     case get(key, new_options) do
       {:ok, [kv]} -> {:ok, kv}
+      {:ok, [_ | _]} -> {:error, "key has multi values"}
       {:error, _} = error -> error
     end
   end
