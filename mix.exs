@@ -9,6 +9,7 @@ defmodule ConsulKv.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       elixirc_options: [warnings_as_errors: true],
+      description: "Elixir SDK for Consul KV store.",
       package: [
         name: "consul_kv",
         maintainers: ["redink"],
