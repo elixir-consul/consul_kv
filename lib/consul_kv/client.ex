@@ -101,21 +101,23 @@ defmodule ConsulKv.Client do
 
   @doc false
   defp parse_get_kv_body(body) do
-    Enum.map(
-      body,
-      fn i ->
-        %ConsulKv{
-          key: Map.get(i, "Key"),
-          flags: Map.get(i, "Flags"),
-          value: decode_value(Map.get(i, "Value")),
-          lock_index: Map.get(i, "LockIndex"),
-          session: Map.get(i, "Session"),
-          create_index: Map.get(i, "CreateIndex"),
-          modify_index: Map.get(i, "ModifyIndex")
-        }
-      end
-    )
+    Enum.map(body, &parse_body/1)
   end
+
+  @doc false
+  defp parse_body(item) when is_map(item) do
+    %ConsulKv{
+      key: Map.get(item, "Key"),
+      flags: Map.get(item, "Flags"),
+      value: decode_value(Map.get(item, "Value")),
+      lock_index: Map.get(item, "LockIndex"),
+      session: Map.get(item, "Session"),
+      create_index: Map.get(item, "CreateIndex"),
+      modify_index: Map.get(item, "ModifyIndex")
+    }
+  end
+
+  defp parse_body(item), do: item
 
   @doc false
   defp decode_value(nil), do: nil

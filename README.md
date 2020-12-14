@@ -112,12 +112,20 @@ iex(5)> ConsulKv.recurse_get("consul-kv")
  ]}
 ```
 
+get keys by a prefix
+
+``` elixir
+iex(6)> ConsulKv.get_keys("consul-kv")
+{:ok, ["consul-kv/k1", "consul-kv/k2"]}
+```
+
+
 ### 4. delete
 
 delete one kv:
 
 ```elixir
-iex(6)> ConsulKv.recurse_delete("consul-kv")
+iex(7)> ConsulKv.recurse_delete("consul-kv")
 {:ok, true}
 ```
 
