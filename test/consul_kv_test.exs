@@ -15,7 +15,7 @@ defmodule ConsulKvTest do
     assert {:ok, [%{key: ^key, value: "single-value"}]} = ConsulKv.get(key)
   end
 
-  test "put and recurse_get/single_get" do
+  test "put then recurse_get, single_get and get keys" do
     key = @prefix <> "multi-put"
 
     key1 = @prefix <> "multi-put/k1"
@@ -35,6 +35,12 @@ defmodule ConsulKvTest do
 
     assert {:error, "key has multi values"} == ConsulKv.single_get(key)
     assert {:ok, %{key: ^key1, value: "v1"}} = ConsulKv.single_get(key1)
+
+    assert {:ok, ["#{@prefix}multi-put/k1", "#{@prefix}multi-put/k2", "#{@prefix}multi-put/k3"]} ==
+             ConsulKv.get_keys(@prefix)
+
+    assert {:ok, ["#{@prefix}multi-put/k1", "#{@prefix}multi-put/k2", "#{@prefix}multi-put/k3"]} ==
+             ConsulKv.get_keys(key)
   end
 
   test "cas put" do

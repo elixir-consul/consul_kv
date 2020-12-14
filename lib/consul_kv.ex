@@ -74,6 +74,15 @@ defmodule ConsulKv do
   def get(key, options \\ []), do: ConsulKv.Client.get_kv(key, options)
 
   @doc """
+  Get keys by given prefix.
+  """
+  @spec get_keys(String.t(), Keyword.t()) :: {:ok, [String.t()]} | {:error, any()}
+  def get_keys(prefix, options \\ []) do
+    new_options = Keyword.merge(options, keys: true)
+    ConsulKv.Client.get_kv(prefix, new_options)
+  end
+
+  @doc """
   Get kv pair by given key.
   """
   @spec single_get(String.t(), Keyword.t()) :: {:ok, ConsulKv.t()} | {:error, any()}
